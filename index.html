@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Futuristic Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container sign-up-container">
+            <form id="signUpForm">
+                <h1>Register</h1>
+                <input type="text" placeholder="First Name" id="firstName" required>
+                <input type="text" placeholder="Last Name" id="lastName" required>
+                <select id="gender" required>
+                    <option value="" disabled selected>Choose Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="number" placeholder="Age" id="age" pattern="\d*" required>
+                <input type="tel" placeholder="Phone Number" id="phoneNumber" pattern="\d*" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome</h1>
+                    <p>To keep connected with us, please "Register" with your personal info.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

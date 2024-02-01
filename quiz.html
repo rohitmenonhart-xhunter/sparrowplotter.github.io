@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden; /* Disable horizontal scroll */
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Adjust the max-width as needed */
+            margin: auto;
+            background-color: #f1f1f1;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #quizContainer {
+            height: 60vh; /* Set the desired height for the quiz container */
+            overflow-y: auto; /* Enable vertical scroll for the quiz container */
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .image-container img {
+            width: calc(50% - 5px);
+            height: auto;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .image-container img:hover {
+            border-color: #3498db;
+        }
+
+        .result-message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .next-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="quizContainer">
+        <div class="question">
+            Which image has male house sparrow in it?
+        </div>
+        <div class="image-container" id="imageContainer">
+            <img src="male_house sparrow.jpg" alt="Image 1" onclick="checkAnswer(1)">
+            <img src="yellow babler.jpeg" alt="Image 2" onclick="checkAnswer(2)">
+            <img src="tailorbird.jpeg" alt="Image 3" onclick="checkAnswer(3)">
+            <img src="sunbird.jpeg" alt="Image 4" onclick="checkAnswer(4)">
+        </div>
+        <div id="resultMessage" class="result-message" style="display: none;"></div>
+        <a href="main.html" class="next-button" id="nextButton" style="display: none;">Start Plotting Sparrows</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

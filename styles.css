@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f1f1f1;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Adjust this as needed */
+    height: 70vh; /* Adjust this to increase the height */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.form-container,
+.overlay-container {
+    width: 100%;
+}
+
+form {
+    width: 80%;
+    margin: auto;
+}
+
+form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.overlay {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #fff;
+    position: relative;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: left 0.6s ease-in-out;
+}
+
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-panel.overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-panel h1 {
+    font-size: 24px;
+}
+
+.overlay-panel p {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.ghost {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 12px;
+    margin-top: 20px;
+    cursor: pointer;
+}
