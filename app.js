@@ -6,22 +6,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var retrievedIcon = L.icon({
     iconUrl: 'marker3.png',
-    iconSize: [220, 220],
-    iconAnchor: [16, 232],
+    iconSize: [64, 64],
+    iconAnchor: [15, 62],
     popupAnchor: [0, -32],
 });
 
 // Initialize Firebase
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
-    apiKey: "AIzaSyCKuoLKspUfEKdkexgO7HD9yb0C32lFI9I",
-    authDomain: "esp-location-56ece.firebaseapp.com",
-    databaseURL: "https://esp-location-56ece-default-rtdb.firebaseio.com",
-    projectId: "esp-location-56ece",
-    storageBucket: "esp-location-56ece.appspot.com",
-    messagingSenderId: "415169225788",
-    appId: "1:415169225788:web:0780c061338be738b8cf39",
-    measurementId: "G-NP5SHD0WWD"
-    };
+  apiKey: "AIzaSyCKuoLKspUfEKdkexgO7HD9yb0C32lFI9I",
+  authDomain: "esp-location-56ece.firebaseapp.com",
+  databaseURL: "https://esp-location-56ece-default-rtdb.firebaseio.com",
+  projectId: "esp-location-56ece",
+  storageBucket: "esp-location-56ece.appspot.com",
+  messagingSenderId: "415169225788",
+  appId: "1:415169225788:web:0780c061338be738b8cf39",
+  measurementId: "G-NP5SHD0WWD"
+};
 
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
@@ -37,12 +38,23 @@ database.ref('birds').once('value', function (birdsSnapshot) {
         if (!isNaN(latitude) && !isNaN(longitude)) {
             // Add marker for each coordinate
             L.marker([latitude, longitude], { icon: retrievedIcon }).addTo(map)
-                .bindPopup(`Number of Sparrows: ${birdData.numberOfSparrows}<br>Gender: ${birdData.gender}<br>Nest Present: ${birdData.nestPresent}<br>Juveniles Present: ${birdData.juvenilesPresent}`);
+            .bindPopup(`
+            Number of Sparrows: ${birdData.numberOfSparrows}<br>
+            Gender: ${birdData.gender}<br>
+            Nest Present: ${birdData.nestPresent}<br>
+            Juveniles Present: ${birdData.juvenilesPresent}<br>
+        `);
+        
         }
     });
 }).catch(function (error) {
     console.error('Error retrieving data from Firebase:', error);
 });
+
+
+
+
+
 
 map.locate({ setView: true, maxZoom: 16 });
 
@@ -82,16 +94,11 @@ function plotSparrow() {
                     timestamp: firebase.database.ServerValue.TIMESTAMP
                 };
 
-                database.ref('birds/' + birdId).set(birdData)
-                    .then(function () {
-                        alert('Sparrow details plotted successfully!');
-                        // Add a marker for the retrieved coordinates
-                        L.marker([birdData.latitude, birdData.longitude], { icon: retrievedIcon }).addTo(map)
-                            .bindPopup(`Number of Sparrows: ${birdData.numberOfSparrows}<br>Gender: ${birdData.gender}<br>Nest Present: ${birdData.nestPresent}<br>Juveniles Present: ${birdData.juvenilesPresent}`);
-                    })
-                    .catch(function (error) {
-                        alert('Error plotting sparrow details: ' + error.message);
-                    });
+                // Save the birdData to local storage
+                localStorage.setItem('currentBirdData', JSON.stringify(birdData));
+
+                // Redirect to the camera page
+                window.location.href = 'camera.html';
             } else {
                 alert('Please enter a valid number for the number of sparrows.');
             }

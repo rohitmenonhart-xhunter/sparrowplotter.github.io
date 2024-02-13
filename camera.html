@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Interface</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #camera {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #captureButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #captureButton:hover {
+            background-color: #4fa3d1;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>capture image</h1>
+    <div id="cameraContainer">
+        <video id="camera" playsinline autoplay muted></video>
+   
+    <video id="camera" width="640" height="480" autoplay></video>
+
+</div>
+    <button id="captureButton" onclick="capturePicture()">Capture Picture</button>
+
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+
+    <!-- Include your Firebase configuration script -->
+    
+
+    <!-- Include camera.js -->
+    <script src="camera.js"></script>
+</body>
+</html>
