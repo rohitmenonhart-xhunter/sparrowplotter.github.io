@@ -27,6 +27,7 @@ async function setupCamera() {
         const stream = await navigator.mediaDevices.getUserMedia({
             video: {
                 deviceId: { exact: backCamera.deviceId },
+                facingMode: 'environment', // This forces the use of the back camera
                 zoom: { ideal: 3 } // Adjust the zoom level as needed
             }
         });
