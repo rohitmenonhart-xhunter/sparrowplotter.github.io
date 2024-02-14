@@ -30,30 +30,29 @@ var database = firebase.database();
 // Retrieve data from Firebase and plot markers
 database.ref('birds').once('value', function (birdsSnapshot) {
     birdsSnapshot.forEach(function (birdSnapshot) {
-        var birdData = birdSnapshot.val();
-        var latitude = birdData.latitude;
-        var longitude = birdData.longitude;
+        try {
+            var birdData = birdSnapshot.val();
+            var latitude = birdData.latitude;
+            var longitude = birdData.longitude;
 
-        // Check if latitude and longitude are valid numbers
-        if (!isNaN(latitude) && !isNaN(longitude)) {
-            // Add marker for each coordinate
-            L.marker([latitude, longitude], { icon: retrievedIcon }).addTo(map)
-            .bindPopup(`
-            Number of Sparrows: ${birdData.numberOfSparrows}<br>
-            Gender: ${birdData.gender}<br>
-            Nest Present: ${birdData.nestPresent}<br>
-            Juveniles Present: ${birdData.juvenilesPresent}<br>
-        `);
-        
+            // Check if latitude and longitude are valid numbers
+            if (!isNaN(latitude) && !isNaN(longitude)) {
+                // Add marker for each coordinate
+                L.marker([latitude, longitude], { icon: retrievedIcon }).addTo(map)
+                    .bindPopup(`
+                        Number of Sparrows: ${birdData.numberOfSparrows}<br>
+                        Gender: ${birdData.gender}<br>
+                        Nest Present: ${birdData.nestPresent}<br>
+                        Juveniles Present: ${birdData.juvenilesPresent}<br>
+                    `);
+            }
+        } catch (error) {
+            console.error('Error processing bird data:', error);
         }
     });
 }).catch(function (error) {
     console.error('Error retrieving data from Firebase:', error);
 });
-
-
-
-
 
 
 map.locate({ setView: true, maxZoom: 16 });
@@ -71,6 +70,7 @@ function onLocationError(e) {
 map.on('locationfound', onLocationFound);
 map.on('locationerror', onLocationError);
 
+// Function to plot new sparrow coordinates
 // Function to plot new sparrow coordinates
 function plotSparrow() {
     navigator.geolocation.getCurrentPosition(
@@ -94,8 +94,8 @@ function plotSparrow() {
                     timestamp: firebase.database.ServerValue.TIMESTAMP
                 };
 
-                // Save the birdData to local storage
-                localStorage.setItem('currentBirdData', JSON.stringify(birdData));
+                // Save the birdData to Firebase
+                database.ref('birds/' + birdId).set(birdData);
 
                 // Redirect to the camera page
                 window.location.href = 'camera.html';
@@ -109,3 +109,5 @@ function plotSparrow() {
         }
     );
 }
+
+
