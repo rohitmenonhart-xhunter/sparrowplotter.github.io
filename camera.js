@@ -38,6 +38,7 @@ async function setupCamera() {
     }
 }
 
+
 // Setup the camera when the page loads
 window.addEventListener('load', setupCamera);
 
@@ -82,6 +83,8 @@ window.addEventListener('load', setupCamera);
                             // Progress
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                             console.log(`Upload progress: ${progress}%`);
+                            alert('please wait we are uploading your picture!');
+
                         },
                         (error) => {
                             // Handle unsuccessful uploads
