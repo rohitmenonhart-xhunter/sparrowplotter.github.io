@@ -28,7 +28,7 @@ async function setupCamera() {
             video: {
                 deviceId: { exact: backCamera.deviceId },
                 facingMode: 'environment', // This forces the use of the back camera
-                zoom: { ideal: 3 } // Adjust the zoom level as needed
+                zoom: { ideal: 5 } // Adjust the zoom level as needed
             }
         });
 
