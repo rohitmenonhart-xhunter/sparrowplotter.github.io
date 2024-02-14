@@ -15,13 +15,31 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
 
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then((stream) => {
+async function setupCamera() {
+    try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        
+        // Find the back camera (assuming it's the last video device)
+        const backCamera = videoDevices[videoDevices.length - 1];
+
+        // Apply constraints, including zoom
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: { exact: backCamera.deviceId },
+                zoom: { ideal: 3 } // Adjust the zoom level as needed
+            }
+        });
+
         video.srcObject = stream;
-    })
-    .catch((error) => {
+    } catch (error) {
         console.error('Error accessing camera:', error);
-    });
+    }
+}
+
+// Setup the camera when the page loads
+window.addEventListener('load', setupCamera);
+
 
     function capturePicture() {
         // Capture device location
@@ -63,7 +81,6 @@ navigator.mediaDevices.getUserMedia({ video: true })
                             // Progress
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                             console.log(`Upload progress: ${progress}%`);
-                            alert(`Upload progress: ${progress}%`);
                         },
                         (error) => {
                             // Handle unsuccessful uploads

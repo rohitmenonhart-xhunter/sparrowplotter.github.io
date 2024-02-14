@@ -186,3 +186,38 @@ function plotSparrow(userId) {
     );
 }
 
+window.addEventListener('load', () => {
+    const hasRegistered = localStorage.getItem('hasRegistered');
+    
+    if (hasRegistered) {
+        // User has registered, load the main part of the app
+        loadMainApp();
+    } else {
+        // User hasn't registered, show registration form
+        showRegistrationForm();
+    }
+});
+
+function showRegistrationForm() {
+    // Implement your registration form logic here
+    // Example: You might show a modal or redirect to a registration page
+    alert('Welcome! Please register.');
+    
+    // Assuming registration is successful, set the flag in localStorage
+    localStorage.setItem('hasRegistered', 'true');
+
+    window.location.href = 'index.html';
+
+
+    // Load the main part of the app
+    loadMainApp();
+}
+
+function loadMainApp() {
+    // Implement the main part of your app logic here
+    // Example: Load the map, plot markers, etc.
+    alert('Loading main app...');
+    window.location.href = 'main.html';
+}
+
+
