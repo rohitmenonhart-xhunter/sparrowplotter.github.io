@@ -95,7 +95,7 @@ window.addEventListener('load', setupCamera);
                             // Handle successful uploads on complete
                             console.log('Picture uploaded successfully!');
                             alert('Image uploaded successfully!');
-                            window.location.href = 'main.html';
+                            window.location.href = 'index.html';
                         }
                     );
                 }, 'image/png');
