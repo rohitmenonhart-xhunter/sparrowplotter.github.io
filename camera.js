@@ -82,8 +82,8 @@ window.addEventListener('load', setupCamera);
                         (snapshot) => {
                             // Progress
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log(`Upload progress: ${progress}%`);
-                            alert('please wait we are uploading your picture!');
+                            alert(`Upload progress: ${progress}%`);
+                            
 
                         },
                         (error) => {
