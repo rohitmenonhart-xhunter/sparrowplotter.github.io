@@ -98,7 +98,6 @@ function plotSparrow() {
                 database.ref('birds/' + birdId).set(birdData);
 
                 // Redirect to the camera page
-                window.location.href = 'camera.html';
             } else {
                 alert('Please enter a valid number for the number of sparrows.');
             }
